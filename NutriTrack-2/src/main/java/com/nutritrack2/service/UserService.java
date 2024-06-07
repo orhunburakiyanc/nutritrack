@@ -94,50 +94,16 @@ public class UserService {
 		
 	}
 	
-	/*public void addFoodToPersonalizedList(String foodName, String userId) {
+	public User getUserByEmail(String email) {
+		User user = userRepo.findByEmail(email);
+		return user;
+	}
 		
-		Optional<User> optionalUser = userRepo.findById(userId);
-		if (optionalUser.isPresent()) {
-			List<Food> food = foodRepo.findByName(foodName);
-			User user = optionalUser.get();
-			
-			logger.info(food.getName());
-			
-			user.getPersonalized_List().add(food[0]);
-			userRepo.save(user); // Save the user with the updated personalized list
-		}else {
-			// Handle the case where the user is not found
-            // For example, you can log an error
-            System.err.println("User with ID " + userId + " not found");
-		}
-		
-		
-		if (optionalUser.isPresent() && optionalFood.isPresent()) {
-	        Food food = optionalFood.get();
-	        
-	        List<Food> pList = optionalUser.get().getPersonalized_List();
-	        pList.add(food);
-	        
-	        optionalUser.get().setPersonalized_List(pList);
-	        
-	        userRepo.save(optionalUser.get()); // Save the user with the updated personalized list
-	    } else {
-	        // If either the user or the food is not found, log an error or throw an exception
-	        if (!optionalUser.isPresent()) {
-	            // Handle the case where the user is not found
-	            // For example, you can log an error
-	            System.err.println("User with ID " + userId + " not found");
-	        }
-	        if (!optionalFood.isPresent()) {
-	            // Handle the case where the food is not found
-	            // For example, you can log an error
-	            System.err.println("Food with ID " + foodId + " not found");
-	        }
-	        // You can also throw an exception or return an error response here
-	    }
-	}*/
-		
-		
+	public void updateUserPersonalizedList(List<Food> personalizedList, String id){
+		Optional<User> user = userRepo.findById(id);
+		user.get().setPersonalized_List(personalizedList);
+		userRepo.save(user.get());
+	}
 	
 	
 	
