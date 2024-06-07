@@ -46,11 +46,15 @@ public class UserController {
 		return userService.getPersonalizedList(id);
 	}
 	
-	/*@PostMapping("/personalizedList/addFood/{id}")
-	public void addFoodToPersonalizedList(@RequestBody String foodName,@PathVariable String id) {
-		userService.addFoodToPersonalizedList(foodName, id);
-	}*/
+	@GetMapping("/getUserByEmail/{email}")
+	public User getUserByEmail(@PathVariable String email) {
+		return userService.getUserByEmail(email);
+	}
 	
+	@PutMapping("/updatePersonalizedList/{id}")
+	public void updateUserPersonalizedList(@RequestBody List<Food> personalizedList, @PathVariable String id) {
+		userService.updateUserPersonalizedList(personalizedList, id);
+	}
 	
 	
 	
